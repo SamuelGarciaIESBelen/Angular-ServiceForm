@@ -6,12 +6,11 @@ import {count} from "rxjs";
 })
 export class LoggerService {
 
-  countLog =0;
-  countWarn =0;
-  countError =0;
+  countLog = 0;
+  countWarn = 0;
+  countError = 0;
 
-  constructor() {
-  }
+  constructor() { }
 
   log(msg: string) {
     console.log(msg);
@@ -31,7 +30,7 @@ export class LoggerService {
     this.showCounts();
   }
 
-  showCounts(){
-    console.log(this.countLog,this.countWarn,this.countError);
+  showCounts() {
+    console.log(this.countLog, this.countWarn, this.countError);
   }
 }
