@@ -1,9 +1,10 @@
 export interface Evento {
-    idEmpleado: number;
-    
     id: number;
-    nombre: string;
+    asunto: string;
     descripcion: string;
-    fecha: Date;
+    fecha: string;
+    cliente: string;
+    empleado: string;
     categoria: "log" | "warn" | "error";
+    horaCreacion: string;
 }
