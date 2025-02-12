@@ -1,0 +1,44 @@
+{
+    "empleados": [
+        {
+            "id": 1,
+            "nombre": "Samuel"
+        },
+        {
+            "id": 2,
+            "nombre": "Shanshui"
+        },
+        {
+            "id": 3,
+            "nombre": "Juan"
+        },
+        {
+            "id": 4,
+            "nombre": "David"
+        },
+        {
+            "id": 5,
+            "nombre": "Zahira"
+        },
+        {
+            "id": 6,
+            "nombre": "Aroa"
+        },
+        {
+            "id": 7,
+            "nombre": "Alejandro"
+        },
+        {
+            "id": 8,
+            "nombre": "Enzo"
+        },
+        {
+            "id": 9,
+            "nombre": "Andrés"
+        },
+        {
+            "id": 10,
+            "nombre": "Julián"
+        }
+    ]
+}
