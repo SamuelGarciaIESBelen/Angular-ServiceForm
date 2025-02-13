@@ -31,17 +31,23 @@ export class ObservableService {
   private countError = new BehaviorSubject<number>(this.contadorError);
   countError$ = this.countError.asObservable();
   
-  constructor() {}
-
-  ngOnInit() {
+  constructor() {
     this.countLog.next(this.contadorLog);
     this.countWarn.next(this.contadorWarn);
     this.countError.next(this.contadorError);
   }
 
-  emitirLog() {}
-  emitirWarn() {}
-  emitirError() {}
+  emitirLog() {
+    this.countLog.next(this.countLog.value + 1);
+  }
+  
+  emitirWarn() {
+    this.countWarn.next(this.countWarn.value + 1);
+  }
+  
+  emitirError() {
+    this.countError.next(this.countError.value + 1);
+  }
   
   emitirUsername(value: any) { this.username.next(value); }
 }

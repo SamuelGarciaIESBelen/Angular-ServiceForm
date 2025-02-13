@@ -6,16 +6,21 @@ import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 
 import { Evento } from '../../model/Evento';
 import { EventService } from '../../service/event.service';
+import { ObservableService } from '../../service/observable.service';
+
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 @Component({
   selector: 'app-form',
-  imports: [CommonModule, NgIf, ReactiveFormsModule],
+  imports: [CommonModule, NgIf, ReactiveFormsModule, BsDatepickerModule],
   templateUrl: './form.component.html',
 })
 export class FormComponent {
 
   private eventService: EventService = inject(EventService);
+  private observableService: ObservableService = inject(ObservableService);
   private listaEventos: Evento[] = this.eventService.getAllEvents();
+  
   constructor() {}
 
   eventForm = new FormGroup({
@@ -25,6 +30,25 @@ export class FormComponent {
     "fecha": new FormControl("", [Validators.required, this.fechaValida()]),
     "categoria": new FormControl("", Validators.required),
   });
+
+  fechaValida(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const fechaIngresada = new Date(control.value);
+      const hoy = new Date();
+      const haceUnMes = new Date();
+      haceUnMes.setMonth(hoy.getMonth() - 1);
+      
+      if (fechaIngresada > hoy) {
+        return { fechaPosterior: true }; // Error: La fecha es posterior a hoy
+      }
+      
+      if (fechaIngresada < haceUnMes) {
+        return { fechaAnterior: true }; // Error: La fecha es anterior al último mes
+      }
+      
+      return null; // La fecha es válida
+    };
+  }
 
   submit() {
     console.log(this.eventForm.value);
@@ -41,31 +65,12 @@ export class FormComponent {
         horaCreacion: new Date().toLocaleString(),
       }
 
+      if (this.eventForm.value.categoria === "log") this.observableService.emitirLog();
+      if (this.eventForm.value.categoria === "warn") this.observableService.emitirWarn();
+      if (this.eventForm.value.categoria === "error") this.observableService.emitirError();
+
       this.eventService.addEvent(nuevoEvento);
       this.eventForm.reset();
     }
   }
-
-
-  fechaValida(): ValidatorFn {
-    return (control: AbstractControl): ValidationErrors | null => {
-      const fechaIngresada = new Date(control.value);
-      const hoy = new Date();
-      const haceUnMes = new Date();
-      haceUnMes.setMonth(hoy.getMonth() - 1); // Resta un mes a la fecha actual
-  
-      // Verifica si la fecha es posterior a hoy
-      if (fechaIngresada > hoy) {
-        return { fechaPosterior: true }; // Error: La fecha es posterior a hoy
-      }
-  
-      // Verifica si la fecha es anterior a hace un mes
-      if (fechaIngresada < haceUnMes) {
-        return { fechaAnterior: true }; // Error: La fecha es anterior al último mes
-      }
-  
-      return null; // La fecha es válida
-    };
-  }
-
 }

@@ -17,7 +17,6 @@ export class NavbarComponent {
   private observableService: ObservableService = inject(ObservableService);
   private eventService: EventService = inject(EventService);
   
-  // username: string = localStorage.getItem("username") ?? ""; PREGUNTAR POR QUÉ NO FUNCIONA
   username: string = "";
 
   listaEventos: Evento[] = this.eventService.getAllEvents();
@@ -29,11 +28,13 @@ export class NavbarComponent {
   constructor () {}
 
   ngOnInit() {
-    // Quitar cuando funcione el localStorage
     this.observableService.username$.subscribe(value => {
       this.username = value;
     });
-    this.username = localStorage.getItem("username") ?? "";
+
+    if(typeof localStorage !== "undefined") {
+      this.username = localStorage.getItem("username") ?? "";
+    }
 
     this.observableService.countLog$.subscribe(count => {
       this.logs = count;
