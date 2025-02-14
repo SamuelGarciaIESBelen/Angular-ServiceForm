@@ -8,11 +8,9 @@ import { Evento } from '../../model/Evento';
 import { EventService } from '../../service/event.service';
 import { ObservableService } from '../../service/observable.service';
 
-import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
-
 @Component({
   selector: 'app-form',
-  imports: [CommonModule, NgIf, ReactiveFormsModule, BsDatepickerModule],
+  imports: [CommonModule, NgIf, ReactiveFormsModule],
   templateUrl: './form.component.html',
 })
 export class FormComponent {
@@ -39,14 +37,14 @@ export class FormComponent {
       haceUnMes.setMonth(hoy.getMonth() - 1);
       
       if (fechaIngresada > hoy) {
-        return { fechaPosterior: true }; // Error: La fecha es posterior a hoy
+        return { fechaPosterior: true };
       }
       
       if (fechaIngresada < haceUnMes) {
-        return { fechaAnterior: true }; // Error: La fecha es anterior al último mes
+        return { fechaAnterior: true };
       }
       
-      return null; // La fecha es válida
+      return null;
     };
   }
 

@@ -26,7 +26,7 @@
         </div>
 
         <label class="mb-2 fw-semibold" for="fecha">Fecha</label>
-        <input class="form-control mb-4" type="date" name="fecha" id="fecha" formControlName="fecha" placeholder="Datepicker" bsDatePicker>
+        <input class="form-control mb-4" type="date" name="fecha" id="fecha" formControlName="fecha" placeholder="Datepicker">
         <div *ngIf="eventForm.get('fecha')?.invalid && (eventForm.get('fecha')?.dirty || eventForm.get('fecha')?.touched)" class="text-danger">
             <p *ngIf="eventForm.get('fecha')?.errors?.['required']">La fecha es obligatoria</p>
             <p *ngIf="eventForm.get('fecha')?.errors?.['fechaPosterior']">La fecha no puede ser posterior a hoy</p>
