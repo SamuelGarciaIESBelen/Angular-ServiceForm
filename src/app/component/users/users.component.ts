@@ -28,6 +28,6 @@ export class UsersComponent {
   submit() {
     this.username = this.userForm.get("username")?.value as string;
     localStorage.setItem("username", this.username);
-    this.observableService.emitirUsername(localStorage.getItem("username"));
+    this.observableService.actualizarUsername(localStorage.getItem("username"));
   }
 }

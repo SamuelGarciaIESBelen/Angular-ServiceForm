@@ -24,6 +24,7 @@ export class NavbarComponent {
   logs = 0;
   warns = 0;
   errors = 0;
+  empleados = 0;
 
   constructor () {}
 
@@ -48,6 +49,10 @@ export class NavbarComponent {
     
     this.observableService.countError$.subscribe(count => {
       this.errors = count;
+    });
+    
+    this.observableService.countEmpl$.subscribe(count => {
+      this.empleados = count;
     });
   }
 }

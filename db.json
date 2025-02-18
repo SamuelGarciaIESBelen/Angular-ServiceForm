@@ -34,21 +34,31 @@
       "id": "4",
       "asunto": "Incidencia 4",
       "descripcion": "Incidencia 4",
-      "fecha": "2025-02-13",
-      "cliente": "Nuria",
+      "cliente": "Sam",
       "empleado": "Samuel",
-      "categoria": "log",
-      "horaCreacion": "18/2/2025, 12:54:07"
+      "fecha": "2025-02-07",
+      "categoria": "error",
+      "horaCreacion": "12/2/2025, 19:38:25"
     },
     {
       "id": "5",
       "asunto": "Incidencia 5",
       "descripcion": "Incidencia 5",
+      "cliente": "Sam",
+      "empleado": "Samuel",
+      "fecha": "2025-02-07",
+      "categoria": "warn",
+      "horaCreacion": "12/2/2025, 19:38:25"
+    },
+    {
+      "id": "6",
+      "asunto": "Incidencia 6",
+      "descripcion": "Incidencia 6",
       "fecha": "2025-02-13",
       "cliente": "Nuria",
       "empleado": "Samuel",
-      "categoria": "warn",
-      "horaCreacion": "18/2/2025, 12:54:07"
+      "categoria": "log",
+      "horaCreacion": "18/2/2025, 14:22:45"
     }
   ],
   "empleados": [

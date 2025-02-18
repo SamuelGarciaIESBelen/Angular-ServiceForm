@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { Evento } from '../../model/Evento';
 import { EventService } from '../../service/event.service';
+import { ObservableService } from '../../service/observable.service';
 
 @Component({
   selector: 'app-events',
@@ -12,6 +13,7 @@ import { EventService } from '../../service/event.service';
 export class EventsComponent {
   
   private eventService: EventService = inject(EventService);
+  private observableService: ObservableService = inject(ObservableService);
   
   listaEventos: Evento[] = [];
   
@@ -33,8 +35,15 @@ export class EventsComponent {
     this.eventService.getErrors().subscribe((listaErrors: Evento[]) => { this.listaEventos = listaErrors });
   }
 
-  eliminarEvento(id: number) {
+  eliminarEvento(id: string) {
     // No funciona con eventos recién añadidos, hay que reiniciar el JSON Server
-    this.eventService.deleteEvento(id).subscribe();
+
+    this.eventService.getEvento(id).subscribe(e => {
+      if (e.categoria === 'log') { this.observableService.restarLog(); }
+      if (e.categoria === 'warn') { this.observableService.restarWarn(); }
+      if (e.categoria === 'error') { this.observableService.restarError(); }
+    });
+
+    this.eventService.deleteEvento(id).subscribe(() => { this.mostrarTodos(); });
   }
 }

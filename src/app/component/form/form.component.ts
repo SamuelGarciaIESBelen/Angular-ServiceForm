@@ -55,7 +55,7 @@ export class FormComponent {
 
     if (this.eventForm.valid) {
       const nuevoEvento: Evento = {
-        id: this.listaEventos.length + 1,
+        id: (this.listaEventos[this.listaEventos.length - 1].id + 1).toString(),
         asunto: this.eventForm.value.asunto!,
         descripcion: this.eventForm.value.descripcion!,
         fecha: this.eventForm.value.fecha!,
@@ -65,9 +65,9 @@ export class FormComponent {
         horaCreacion: new Date().toLocaleString(),
       }
 
-      if (this.eventForm.value.categoria === "log") this.observableService.emitirLog();
-      if (this.eventForm.value.categoria === "warn") this.observableService.emitirWarn();
-      if (this.eventForm.value.categoria === "error") this.observableService.emitirError();
+      if (this.eventForm.value.categoria === "log") this.observableService.sumarLog();
+      if (this.eventForm.value.categoria === "warn") this.observableService.sumarWarn();
+      if (this.eventForm.value.categoria === "error") this.observableService.sumarError();
 
       this.eventService.addEvento(nuevoEvento).subscribe(() => { this.listaEventos.push(nuevoEvento); });
       this.eventForm.reset();

@@ -20,11 +20,11 @@ export class EventService {
   
   getErrors() { return this.http.get<Evento[]>(`${this.url}?categoria=error`); }
 
-  getEvento(id: number) { return this.http.get<Evento>(`${this.url}/${id}`); }
+  getEvento(id: string) { return this.http.get<Evento>(`${this.url}/${id}`); }
 
   addEvento(evento: Evento) { return this.http.post<Evento>(this.url, evento); }
 
   updateEvento(evento: Evento) { return this.http.put<Evento>(`${this.url}/${evento.id}`, evento); }
 
-  deleteEvento(id: number) { return this.http.delete(`${this.url}/${id}`); }
+  deleteEvento(id: string) { return this.http.delete(`${this.url}/${id}`); }
 }
