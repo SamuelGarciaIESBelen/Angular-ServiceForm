@@ -16,6 +16,7 @@
                 <th>Fecha</th>
                 <th>Categoría</th>
                 <th>Fecha de creación</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -32,6 +33,7 @@
                     <span class="btn btn-danger" *ngIf="e.categoria === 'error'">ERROR</span>
                 </td>
                 <td>{{e.horaCreacion}}</td>
+                <td><button class="btn btn-danger border-dark" (click)="eliminarEvento(e.id)">Eliminar</button></td>
             </tr>
         </tbody>
     </table>

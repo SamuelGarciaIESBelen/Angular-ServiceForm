@@ -19,7 +19,7 @@ export class NavbarComponent {
   
   username: string = "";
 
-  listaEventos: Evento[] = this.eventService.getAllEvents();
+  listaEventos: Evento[] = [];
 
   logs = 0;
   warns = 0;
@@ -28,6 +28,8 @@ export class NavbarComponent {
   constructor () {}
 
   ngOnInit() {
+    this.eventService.getAllEventos().subscribe((listaEventos: Evento[]) => { this.listaEventos = listaEventos; });
+    
     this.observableService.username$.subscribe(value => {
       this.username = value;
     });

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Empleado } from '../model/Empleado';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -8,15 +9,15 @@ export class EmpleadoService {
 
     private url = 'http://localhost:3000/empleados';
 
-    constructor() { }
+    constructor(private http: HttpClient) { }
   
-    async getAllEmpleados(): Promise<Empleado[]> {
-        const data = await fetch(this.url);
-        return (await data.json()) ?? [];
-    }
+    getAllEmpleados() { return this.http.get<Empleado[]>(this.url); }
 
-    async getEmpleado(id: number): Promise<Empleado | undefined> {
-        const data = await fetch(`${this.url}/${id}`);
-        return (await data.json()) ?? {};
-    }
+    getEmpleado(id: number) { return this.http.get<Empleado>(`${this.url}/${id}`); }
+
+    addEmpleado(empleado: Empleado) { return this.http.post<Empleado>(this.url, empleado); }
+
+    updateEmpleado(empleado: Empleado) { return this.http.put<Empleado>(`${this.url}/${empleado.id}`, empleado); }
+
+    deleteEmpleado(id: number) { return this.http.delete(`${this.url}/${id}`); }
 }

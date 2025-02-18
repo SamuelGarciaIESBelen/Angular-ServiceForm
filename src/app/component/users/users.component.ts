@@ -18,7 +18,7 @@ export class UsersComponent {
   username: string = "";
 
   constructor(private observableService: ObservableService) {
-    this.empleadoService.getAllEmpleados().then((listEmpleados: Empleado[]) => { this.listEmpleados = listEmpleados; });
+    this.empleadoService.getAllEmpleados().subscribe((listEmpleados: Empleado[]) => { this.listEmpleados = listEmpleados; });
   }
   
   userForm = new FormGroup({

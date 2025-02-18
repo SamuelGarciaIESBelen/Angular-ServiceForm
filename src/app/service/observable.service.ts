@@ -13,14 +13,14 @@ export class ObservableService {
   
   private eventService: EventService = inject(EventService);
   
-  listaEventos: Evento[] = this.eventService.getAllEvents();
+  listaEventos: Evento[] = [];
   
   private username = new BehaviorSubject<string>("");
   username$ = this.username.asObservable();
   
-  contadorLog = this.listaEventos.filter((e) => e.categoria === "log").length;
-  contadorWarn = this.listaEventos.filter((e) => e.categoria === "warn").length;
-  contadorError = this.listaEventos.filter((e) => e.categoria === "error").length;
+  contadorLog = 0;
+  contadorWarn = 0;
+  contadorError = 0;
 
   private countLog = new BehaviorSubject<number>(this.contadorLog);
   countLog$ = this.countLog.asObservable();
@@ -32,6 +32,12 @@ export class ObservableService {
   countError$ = this.countError.asObservable();
   
   constructor() {
+    this.eventService.getAllEventos().subscribe((listaEventos: Evento[]) => { this.listaEventos = listaEventos; });
+
+    this.contadorLog = this.listaEventos.filter((e) => e.categoria === "log").length;
+    this.contadorWarn = this.listaEventos.filter((e) => e.categoria === "warn").length;
+    this.contadorError = this.listaEventos.filter((e) => e.categoria === "error").length;
+
     this.countLog.next(this.contadorLog);
     this.countWarn.next(this.contadorWarn);
     this.countError.next(this.contadorError);

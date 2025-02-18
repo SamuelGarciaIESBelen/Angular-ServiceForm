@@ -10,36 +10,31 @@ import { EventService } from '../../service/event.service';
   templateUrl: './events.component.html',
 })
 export class EventsComponent {
+  
   private eventService: EventService = inject(EventService);
   
-  listaEventos: Evento[] = this.eventService.getAllEvents();
+  listaEventos: Evento[] = [];
+  
+  constructor() { this.mostrarTodos(); }
 
-  // CREO QUE NO ES EFICIENTE, SEGURO QUE SE PUEDE HACER MEJOR
-
-  mostrarTodos() {
-    console.log("Mostrar todos");
-    
-    this.listaEventos = this.eventService.getAllEvents();
+  mostrarTodos() {    
+    this.eventService.getAllEventos().subscribe((listaEventos: Evento[]) => { this.listaEventos = listaEventos; });
   }
   
   mostrarLogs() {
-    this.listaEventos = this.eventService.getAllEvents();
-    console.log("Mostrar logs");
-
-    this.listaEventos = this.listaEventos.filter(e => e.categoria === "log");
+    this.eventService.getLogs().subscribe((listaLogs: Evento[]) => { this.listaEventos = listaLogs });
   }
   
   mostrarWarnings() {
-    this.listaEventos = this.eventService.getAllEvents();
-    console.log("Mostrar warnings");
-
-    this.listaEventos = this.listaEventos.filter(e => e.categoria === "warn");
+    this.eventService.getWarns().subscribe((listaWarnings: Evento[]) => { this.listaEventos = listaWarnings });
   }
   
   mostrarErrores() {
-    this.listaEventos = this.eventService.getAllEvents();
-    console.log("Mostrar errores");
+    this.eventService.getErrors().subscribe((listaErrors: Evento[]) => { this.listaEventos = listaErrors });
+  }
 
-    this.listaEventos = this.listaEventos.filter(e => e.categoria === "error");
+  eliminarEvento(id: number) {
+    // No funciona con eventos recién añadidos, hay que reiniciar el JSON Server
+    this.eventService.deleteEvento(id).subscribe();
   }
 }

@@ -17,9 +17,11 @@ export class FormComponent {
 
   private eventService: EventService = inject(EventService);
   private observableService: ObservableService = inject(ObservableService);
-  private listaEventos: Evento[] = this.eventService.getAllEvents();
+  private listaEventos: Evento[] = [];
   
-  constructor() {}
+  constructor() {
+    this.eventService.getAllEventos().subscribe((listaEventos: Evento[]) => { this.listaEventos = listaEventos; });
+  }
 
   eventForm = new FormGroup({
     "asunto": new FormControl("", [Validators.required, Validators.minLength(5)]),
@@ -67,7 +69,7 @@ export class FormComponent {
       if (this.eventForm.value.categoria === "warn") this.observableService.emitirWarn();
       if (this.eventForm.value.categoria === "error") this.observableService.emitirError();
 
-      this.eventService.addEvent(nuevoEvento);
+      this.eventService.addEvento(nuevoEvento).subscribe(() => { this.listaEventos.push(nuevoEvento); });
       this.eventForm.reset();
     }
   }
