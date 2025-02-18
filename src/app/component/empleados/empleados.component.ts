@@ -28,7 +28,7 @@ export class EmpleadosComponent {
   submit() {
     if (this.emplForm.valid) {
       const nuevoEmpleado: Empleado = {
-        id: (this.listaEmpleados.length + 1).toString(),
+        id: (Number.parseInt(this.listaEmpleados[this.listaEmpleados.length - 1].id) + 1).toString(),
         nombre: this.emplForm.value.nombre!
       }
 

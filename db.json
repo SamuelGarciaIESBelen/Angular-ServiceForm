@@ -41,16 +41,6 @@
       "horaCreacion": "12/2/2025, 19:38:25"
     },
     {
-      "id": "5",
-      "asunto": "Incidencia 5",
-      "descripcion": "Incidencia 5",
-      "cliente": "Sam",
-      "empleado": "Samuel",
-      "fecha": "2025-02-07",
-      "categoria": "warn",
-      "horaCreacion": "12/2/2025, 19:38:25"
-    },
-    {
       "id": "6",
       "asunto": "Incidencia 6",
       "descripcion": "Incidencia 6",
@@ -59,6 +49,16 @@
       "empleado": "Samuel",
       "categoria": "log",
       "horaCreacion": "18/2/2025, 14:22:45"
+    },
+    {
+      "id": "7",
+      "asunto": "Incidencia 7",
+      "descripcion": "Incidencia 7",
+      "fecha": "2025-02-12",
+      "cliente": "Nuria",
+      "empleado": "Samuel",
+      "categoria": "error",
+      "horaCreacion": "18/2/2025, 17:26:38"
     }
   ],
   "empleados": [

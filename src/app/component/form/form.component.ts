@@ -55,7 +55,7 @@ export class FormComponent {
 
     if (this.eventForm.valid) {
       const nuevoEvento: Evento = {
-        id: (this.listaEventos[this.listaEventos.length - 1].id + 1).toString(),
+        id: (Number.parseInt(this.listaEventos[this.listaEventos.length - 1].id) + 1).toString(),
         asunto: this.eventForm.value.asunto!,
         descripcion: this.eventForm.value.descripcion!,
         fecha: this.eventForm.value.fecha!,
