@@ -18,9 +18,15 @@ export class FormComponent {
   private eventService: EventService = inject(EventService);
   private observableService: ObservableService = inject(ObservableService);
   private listaEventos: Evento[] = [];
-  
+
   constructor() {
     this.eventService.getAllEventos().subscribe((listaEventos: Evento[]) => { this.listaEventos = listaEventos; });
+
+    this.eventForm.valueChanges.subscribe(() => localStorage.setItem("datosFormCrearEvento", JSON.stringify(this.eventForm.value)));
+    
+    if (localStorage.getItem("datosFormCrearEvento")) {
+      this.eventForm.setValue(JSON.parse(localStorage.getItem("datosFormCrearEvento") ?? "{}"))
+    }
   }
 
   eventForm = new FormGroup({
